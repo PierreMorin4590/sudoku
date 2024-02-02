@@ -19,7 +19,10 @@ td {
     width: calc(100vh/14);
     height: calc(100vh/14);
     text-align: center;
+    font-size: calc(100vh/22);
     border: 1px solid black;
+    box-sizing: border-box;
+    cursor: pointer;
     
 }
 
