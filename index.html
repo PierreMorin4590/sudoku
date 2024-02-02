@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Project</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <h1>Racoon Sudoku</h1>
+        <img src="./images/Raccoon.png" alt="Un petit raton laveur en dessin cartoon" style="width: calc(80vh/10);">
+    </header>
+    <br>
+    <!-- Grille de sudoku -->
+    <table>
+        <tbody>
+            <tr>
+                <td class="grid 0-0" onclick="pasteContent(0-0)">Cell 1</td>
+                <td class="grid 0-1" onclick="pasteContent(0-1)">Cell 2</td>
+                <td class="grid 0-2" onclick="pasteContent(0-2)">Cell 3</td>
+                <td class="grid 0-3" onclick="pasteContent(0-3)">Cell 4</td>
+                <td class="grid 0-4" onclick="pasteContent(0-4)">Cell 5</td>
+                <td class="grid 0-5" onclick="pasteContent(0-5)">Cell 6</td>
+                <td class="grid 0-6" onclick="pasteContent(0-6)">Cell 7</td>
+                <td class="grid 0-7" onclick="pasteContent(0-7)">Cell 8</td>
+                <td class="grid 0-8" onclick="pasteContent(0-8)">Cell 9</td>
+            </tr>
+            <tr>
+                <td class="grid 1-0" onclick="pasteContent(1-0)">Cell 1</td>
+                <td class="grid 1-1" onclick="pasteContent(1-1)">Cell 2</td>
+                <td class="grid 1-2" onclick="pasteContent(1-2)">Cell 3</td>
+                <td class="grid 1-3" onclick="pasteContent(1-3)">Cell 4</td>
+                <td class="grid 1-4" onclick="pasteContent(1-4)">Cell 5</td>
+                <td class="grid 1-5" onclick="pasteContent(1-5)">Cell 6</td>
+                <td class="grid 1-6" onclick="pasteContent(1-6)">Cell 7</td>
+                <td class="grid 1-7" onclick="pasteContent(1-7)">Cell 8</td>
+                <td class="grid 1-8" onclick="pasteContent(1-8)">Cell 9</td>
+            </tr>
+            <tr>
+                <td class="grid 2-0" onclick="pasteContent(2-0)">Cell 1</td>
+                <td class="grid 2-1" onclick="pasteContent(2-1)">Cell 2</td>
+                <td class="grid 2-2" onclick="pasteContent(2-2)">Cell 3</td>
+                <td class="grid 2-3" onclick="pasteContent(2-3)">Cell 4</td>
+                <td class="grid 2-4" onclick="pasteContent(2-4)">Cell 5</td>
+                <td class="grid 2-5" onclick="pasteContent(2-5)">Cell 6</td>
+                <td class="grid 2-6" onclick="pasteContent(2-6)">Cell 7</td>
+                <td class="grid 2-7" onclick="pasteContent(2-7)">Cell 8</td>
+                <td class="grid 2-8" onclick="pasteContent(2-8)">Cell 9</td>
+            </tr>
+            <tr>
+                <td class="grid 3-0" onclick="pasteContent(3-0)">Cell 1</td>
+                <td class="grid 3-1" onclick="pasteContent(3-1)">Cell 2</td>
+                <td class="grid 3-2" onclick="pasteContent(3-2)">Cell 3</td>
+                <td class="grid 3-3" onclick="pasteContent(3-3)">Cell 4</td>
+                <td class="grid 3-4" onclick="pasteContent(3-4)">Cell 5</td>
+                <td class="grid 3-5" onclick="pasteContent(3-5)">Cell 6</td>
+                <td class="grid 3-6" onclick="pasteContent(3-6)">Cell 7</td>
+                <td class="grid 3-7" onclick="pasteContent(3-7)">Cell 8</td>
+                <td class="grid 3-8" onclick="pasteContent(3-8)">Cell 9</td>
+            </tr>
+            <tr>
+                <td class="grid 4-0" onclick="pasteContent(4-0)">Cell 1</td>
+                <td class="grid 4-1" onclick="pasteContent(4-1)">Cell 2</td>
+                <td class="grid 4-2" onclick="pasteContent(4-2)">Cell 3</td>
+                <td class="grid 4-3" onclick="pasteContent(4-3)">Cell 4</td>
+                <td class="grid 4-4" onclick="pasteContent(4-4)">Cell 5</td>
+                <td class="grid 4-5" onclick="pasteContent(4-5)">Cell 6</td>
+                <td class="grid 4-6" onclick="pasteContent(4-6)">Cell 7</td>
+                <td class="grid 4-7" onclick="pasteContent(4-7)">Cell 8</td>
+                <td class="grid 4-8" onclick="pasteContent(4-8)">Cell 9</td>
+            </tr>
+            <tr>
+                <td class="grid 5-0" onclick="pasteContent(5-0)">Cell 1</td>
+                <td class="grid 5-1" onclick="pasteContent(5-1)">Cell 2</td>
+                <td class="grid 5-2" onclick="pasteContent(5-2)">Cell 3</td>
+                <td class="grid 5-3" onclick="pasteContent(5-3)">Cell 4</td>
+                <td class="grid 5-4" onclick="pasteContent(5-4)">Cell 5</td>
+                <td class="grid 5-5" onclick="pasteContent(5-5)">Cell 6</td>
+                <td class="grid 5-6" onclick="pasteContent(5-6)">Cell 7</td>
+                <td class="grid 5-7" onclick="pasteContent(5-7)">Cell 8</td>
+                <td class="grid 5-8" onclick="pasteContent(5-8)">Cell 9</td>
+            </tr>
+            <tr>
+                <td class="grid 6-0" onclick="pasteContent(6-0)">Cell 1</td>
+                <td class="grid 6-1" onclick="pasteContent(6-1)">Cell 2</td>
+                <td class="grid 6-2" onclick="pasteContent(6-2)">Cell 3</td>
+                <td class="grid 6-3" onclick="pasteContent(6-3)">Cell 4</td>
+                <td class="grid 6-4" onclick="pasteContent(6-4)">Cell 5</td>
+                <td class="grid 6-5" onclick="pasteContent(6-5)">Cell 6</td>
+                <td class="grid 6-6" onclick="pasteContent(6-6)">Cell 7</td>
+                <td class="grid 6-7" onclick="pasteContent(6-7)">Cell 8</td>
+                <td class="grid 6-8" onclick="pasteContent(6-8)">Cell 9</td>
+            </tr>
+            <tr>
+                <td class="grid 7-0" onclick="pasteContent(7-0)">Cell 1</td>
+                <td class="grid 7-1" onclick="pasteContent(7-1)">Cell 2</td>
+                <td class="grid 7-2" onclick="pasteContent(7-2)">Cell 3</td>
+                <td class="grid 7-3" onclick="pasteContent(7-3)">Cell 4</td>
+                <td class="grid 7-4" onclick="pasteContent(7-4)">Cell 5</td>
+                <td class="grid 7-5" onclick="pasteContent(7-5)">Cell 6</td>
+                <td class="grid 7-6" onclick="pasteContent(7-6)">Cell 7</td>
+                <td class="grid 7-7" onclick="pasteContent(7-7)">Cell 8</td>
+                <td class="grid 7-8" onclick="pasteContent(7-8)">Cell 9</td>
+            </tr>
+            <tr>
+                <td class="grid 8-0" onclick="pasteContent(8-0)">Cell 1</td>
+                <td class="grid 8-1" onclick="pasteContent(8-1)">Cell 2</td>
+                <td class="grid 8-2" onclick="pasteContent(8-2)">Cell 3</td>
+                <td class="grid 8-3" onclick="pasteContent(8-3)">Cell 4</td>
+                <td class="grid 8-4" onclick="pasteContent(8-4)">Cell 5</td>
+                <td class="grid 8-5" onclick="pasteContent(8-5)">Cell 6</td>
+                <td class="grid 8-6" onclick="pasteContent(8-6)">Cell 7</td>
+                <td class="grid 8-7" onclick="pasteContent(8-7)">Cell 8</td>
+                <td class="grid 8-8" onclick="pasteContent(8-8)">Cell 9</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <!-- Sélécteur -->
+    <table>
+        <tbody>
+            <tr>
+                <td class="selector select1" onclick="copyContent(1)">1</td>
+                <td class="selector select2" onclick="copyContent(2)">2</td>
+                <td class="selector select3" onclick="copyContent(3)">3</td>
+                <td class="selector select4" onclick="copyContent(4)">4</td>
+                <td class="selector select5" onclick="copyContent(5)">5</td>
+                <td class="selector select6" onclick="copyContent(6)">6</td>
+                <td class="selector select7" onclick="copyContent(7)">7</td>
+                <td class="selector select8" onclick="copyContent(8)">8</td>
+                <td class="selector select9" onclick="copyContent(9)">9</td>  
+            </tr>
+        </tbody>
+    </table>
+    <script src="./app.js"></script>
+</body>
+</html>

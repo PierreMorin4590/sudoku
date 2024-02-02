@@ -1,0 +1,33 @@
+/* {
+    border: 1px solid red;
+} */
+
+table {
+    border: 1px solid black;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+td {
+    width: calc(100vh/14);
+    height: calc(100vh/14);
+    text-align: center;
+    border: 1px solid black;
+    
+}
+
+.grid:nth-child(3), .grid:nth-child(6) {
+    border-right: 3px solid black;
+}
+
+tr:nth-child(3), tr:nth-child(6) {
+    border-bottom: 3px solid black;
+}
+
