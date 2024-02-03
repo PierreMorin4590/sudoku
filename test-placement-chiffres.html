@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau dans des Div</title>
+    <!-- Ajoutez votre lien vers le fichier de style CSS ici si nécessaire -->
+</head>
+
+<body>
+    <!-- Première série de div -->
+    <div class="grid cell-5"></div>
+    <div class="grid cell-5"></div>
+    <div class="grid cell-5"></div>
+    <div class="grid cell-5"></div>
+    <div class="grid cell-5"></div>
+    <div class="grid cell-5"></div>
+    <div class="grid cell-5"></div>
+    <div class="grid cell-5"></div>
+    <div class="grid cell-5"></div>
+    <!-- Deuxième série de div -->
+    <div class="grid cell-6"></div>
+    <div class="grid cell-6"></div>
+    <div class="grid cell-6"></div>
+    <div class="grid cell-6"></div>
+    <div class="grid cell-6"></div>
+    <div class="grid cell-6"></div>
+    <div class="grid cell-6"></div>
+    <div class="grid cell-6"></div>
+    <div class="grid cell-6"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tableau à utiliser
+            const tableau = [[1, 2, 3, 4, 5, 6, 7, 8, 9], [10, 11, 12, 13, 14, 15, 16, 17, 18]];
+
+            // Sélectionnez toutes les divs de la première série
+            const divsSerie1 = document.querySelectorAll('.grid.cell-5');
+
+            // Utilisez forEach pour itérer à travers le tableau et affecter les valeurs à chaque div de la première série
+            tableau[0].forEach((valeur, index) => {
+                divsSerie1[index].textContent = valeur;
+            });
+
+            // Sélectionnez toutes les divs de la deuxième série
+            const divsSerie2 = document.querySelectorAll('.grid.cell-6');
+
+            // Utilisez forEach pour itérer à travers le tableau et affecter les valeurs à chaque div de la deuxième série
+            tableau[1].forEach((valeur, index) => {
+                divsSerie2[index].textContent = valeur;
+            });
+        });
+    </script>
+</body>
+
+</html>
