@@ -74,6 +74,7 @@ const app = {
         }
     },
 
+    // Url de l'API permettant de générer une grille
     createUrl: "https://sudoku-api.vercel.app/api/dosuku",
     
     getSudoku: async function () {
@@ -110,34 +111,61 @@ const app = {
         const row7 = document.querySelectorAll('.row-7');
         const row8 = document.querySelectorAll('.row-8');
         const row9 = document.querySelectorAll('.row-9');
-
+        
         // Utilisez forEach pour itérer à travers le tableau et affecter les valeurs à chasue rangée
         tableau[0].forEach((valeur, index) => {
-            row1[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[0][index] = '';
+            }
+            row1[index].textContent = tableau[0][index];
         });
         tableau[1].forEach((valeur, index) => {
-            row2[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[1][index] = '';
+            }
+            row2[index].textContent = tableau[1][index];
         });
         tableau[2].forEach((valeur, index) => {
-            row3[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[2][index] = '';
+            }
+            row3[index].textContent = tableau[2][index];
         });
         tableau[3].forEach((valeur, index) => {
-            row4[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[3][index] = '';
+            }
+            row4[index].textContent = tableau[3][index];
         });
         tableau[4].forEach((valeur, index) => {
-            row5[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[4][index] = '';
+            }
+            row5[index].textContent = tableau[4][index];
         });
         tableau[5].forEach((valeur, index) => {
-            row6[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[5][index] = '';
+            }
+            row6[index].textContent = tableau[5][index];
         });
         tableau[6].forEach((valeur, index) => {
-            row7[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[6][index] = '';
+            }
+            row7[index].textContent = tableau[6][index];
         });
         tableau[7].forEach((valeur, index) => {
-            row8[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[7][index] = '';
+            }
+            row8[index].textContent = tableau[7][index];
         });
         tableau[8].forEach((valeur, index) => {
-            row9[index].textContent = valeur;
+            if (valeur === 0) {
+                tableau[8][index] = '';
+            }
+            row9[index].textContent = tableau[8][index];
         });
     }
 }
