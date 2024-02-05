@@ -5,7 +5,6 @@ const app = {
     init: async function() {
         console.log('app.init()');
         console.log(this.createUrl);
-    
 
         // On sélectionne tous les sélécteurs
         const selectors = document.querySelectorAll(".selector");
@@ -23,14 +22,11 @@ const app = {
             cell.addEventListener("click", this.handlePasteContent);
         });
 
-        // Obtenir les données du sudoku
-        const sudoku = await this.getSudoku();
+        // On sélectionne le button "Nouvelle partie"
+        const newGame = document.querySelector('#new-game');
 
-        // Afficher uniquement la grille de sudoku 
-        const setupGame = sudoku.newboard.grids[0].value;
-        console.log(setupGame);
-
-        this.setupGrid(setupGame);
+        // On place un addEventListener sur le button "Nouvelle partie"
+        newGame.addEventListener("click", () => this.handleStartNewGame());
     },
 
     handleCopyContent: function (event) {
@@ -81,14 +77,13 @@ const app = {
         try {
             // fetch retourne une promesse (objet)
             const response = await fetch(this.createUrl);
-           
 
             if (!response.ok) {
                 throw new Error(`Failed to fetch : ${response.status}`);
             }
             // On attend la résolution de la promesse et on récupère les données
             const sudoku = await response.json();
-        
+
             // On retourne tous les jeux vidéos
             return sudoku;
         } catch (error) {
@@ -111,7 +106,7 @@ const app = {
         const row7 = document.querySelectorAll('.row-7');
         const row8 = document.querySelectorAll('.row-8');
         const row9 = document.querySelectorAll('.row-9');
-        
+
         // Utilisez forEach pour itérer à travers le tableau et affecter les valeurs à chasue rangée
         tableau[0].forEach((valeur, index) => {
             if (valeur === 0) {
@@ -167,6 +162,18 @@ const app = {
             }
             row9[index].textContent = tableau[8][index];
         });
+    },
+
+    handleStartNewGame: async function() {
+        console.log("Youhou, tu as cliqué sur Nouvelle partie !");
+        // Obtenir les données du sudoku
+        const sudoku = await this.getSudoku();
+
+        // Afficher uniquement la grille de sudoku 
+        const setupGame = sudoku.newboard.grids[0].value;
+        console.log(setupGame);
+
+        this.setupGrid(setupGame);
     }
 }
 

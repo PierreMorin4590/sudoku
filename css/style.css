@@ -34,3 +34,14 @@ tr:nth-child(3), tr:nth-child(6) {
     border-bottom: 3px solid black;
 }
 
+.new-game {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    height: 35px;
+    width: 150px;
+    font-size: 20px;
+}
+
