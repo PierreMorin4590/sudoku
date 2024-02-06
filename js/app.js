@@ -11,7 +11,7 @@ const app = {
 
         // On place un addEventListener sur chacun des sélecteurs
         selectors.forEach(selector => {
-            selector.addEventListener("click", this.handleCopyContent);
+            selector.addEventListener("click", (event) => this.handleCopyContent(event));
         });
 
         // On sélectionne toutes les cellules
@@ -37,16 +37,36 @@ const app = {
      */
     handleStartNewGame: async function() {
         console.log("Youhou, tu as cliqué sur Nouvelle partie !");
+
+        // On reboot la couleur des selecteurs
+        this.rebootSelectors();
+
         // On récupère les données du sudoku
         const sudoku = await this.getSudoku();
 
-        // On affiche uniquement la grille de sudoku 
-        const setupGame = sudoku.newboard.grids[0].value;
+        // On affiche la difficulté
         const difficulty = sudoku.newboard.grids[0].difficulty;
         console.log(difficulty);
+
+        const difficultyScreen = document.querySelector(".difficulty");
+        difficultyScreen.innerHTML = difficulty;
+
+        // On affiche la grille de sudoku 
+        const setupGame = sudoku.newboard.grids[0].value;
         console.log(setupGame);
 
+        // On appelle la fonction qui dispatche les chiffres dans la grille
         this.setupGrid(setupGame);
+    },
+
+    rebootSelectors() {
+        // On sélectionne les sélecteurs
+        const selectors = document.querySelectorAll(".selector");
+
+        // On reboot la class "selected"
+        selectors.forEach(selector => {
+            selector.classList.remove("selected");
+        });
     },
 
     /**
@@ -55,13 +75,7 @@ const app = {
      */
     handleCopyContent: function(event) {
         console.log("J'ai copié !");
-        // On sélectionne les sélecteurs
-        const selectors = document.querySelectorAll(".selector");
-
-        // On reboot la class "selected"
-        selectors.forEach(selector => {
-            selector.classList.remove("selected");
-        });
+        this.rebootSelectors();
 
         // On ajoute une classe "selected" au chiffre sélectionné pour le rendre plus visible
         const selectorClicked = event.currentTarget;
