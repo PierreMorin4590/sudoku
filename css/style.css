@@ -45,3 +45,6 @@ button {
     font-size: 20px;
 }
 
+.selected {
+    background-color: #E0E0E0;
+}

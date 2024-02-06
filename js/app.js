@@ -55,7 +55,20 @@ const app = {
      */
     handleCopyContent: function(event) {
         console.log("J'ai copié !");
+        // On sélectionne les sélecteurs
+        const selectors = document.querySelectorAll(".selector");
 
+        // On reboot la class "selected"
+        selectors.forEach(selector => {
+            selector.classList.remove("selected");
+        });
+
+        // On ajoute une classe "selected" au chiffre sélectionné pour le rendre plus visible
+        const selectorClicked = event.currentTarget;
+        console.log(selectorClicked);
+        selectorClicked.classList.toggle("selected");
+
+        // On récupère le contenu texte de la case
         const sourceNumber = event.currentTarget.textContent;
 
         // On construit la classe de source en fonction du numéro choisi
@@ -91,11 +104,18 @@ const app = {
         var destinationDiv = document.querySelector(destinationClass);
         console.log(destinationDiv);
 
-        // On vérifie si l'élément destination est présent et s'il y a du contenu à coller
+        // On vérifie si la case est déjà occupée ou non par un chiffre de la grille générée aléatoirement, 
+        // si c'est le cas, on return pour empêcher de coller un chiffre différent !
+
+        if (destinationDiv.textContent.length > 0) {
+            return;
+        };
+
+        // Sinon, on vérifie si l'élément destination est présent et s'il y a du contenu à coller
         if (destinationDiv && contentToCopy !== "") {
             // Si oui, on colle le contenu dans la destination
             destinationDiv.innerHTML = contentToCopy;
-        }
+        };
     },
 
     // URL de l'API permettant de générer une grille
