@@ -28,52 +28,84 @@ const app = {
         // On place un addEventListener sur le button "Nouvelle partie"
         newGame.addEventListener("click", () => this.handleStartNewGame());
     },
+    
+    /**
+     * Fonction asynchrone qui permet de générer une grille aléatoire de sudoku quand on clique sur le bouton "Nouvelle partie".
+     * La fonction fait appel à la fonction asynchrone getSudoku() qui permet de récupérer une grille aléatoire de sudoku grâce
+     * à l'API Fetch. 
+     * La fonction déclenche la fonction setupGrid() qui permet de placer les chiffres dans la grille.
+     */
+    handleStartNewGame: async function() {
+        console.log("Youhou, tu as cliqué sur Nouvelle partie !");
+        // On récupère les données du sudoku
+        const sudoku = await this.getSudoku();
 
-    handleCopyContent: function (event) {
+        // On affiche uniquement la grille de sudoku 
+        const setupGame = sudoku.newboard.grids[0].value;
+        const difficulty = sudoku.newboard.grids[0].difficulty;
+        console.log(difficulty);
+        console.log(setupGame);
+
+        this.setupGrid(setupGame);
+    },
+
+    /**
+     * Fonction qui va permettre de copier le contenu d'une des cases du sélecteur de chiffre
+     * @param {*} event 
+     */
+    handleCopyContent: function(event) {
         console.log("J'ai copié !");
 
         const sourceNumber = event.currentTarget.textContent;
 
-        // Construisez la classe de source en fonction du numéro choisi
+        // On construit la classe de source en fonction du numéro choisi
         var sourceClass = '.selector:nth-child(' + sourceNumber + ')';
         console.log(sourceClass);
 
-        // Sélectionnez la source par sa classe
+        // On sélectionne la source par sa classe
         var sourceDiv = document.querySelector(sourceClass);
 
-        // Vérifiez si l'élément source est présent
+        // On vérifie si l'élément source est présent
         if (sourceDiv) {
-            // Copiez le contenu de la source
+            // Si oui, on colle le contenu de la source
             contentToCopy = sourceDiv.innerHTML;
             console.log(contentToCopy);
         }
     },
 
+    /**
+     * Fonction qui va permettre de coller le contenu d'une des cases du sélecteur de chiffre dans les cases de la grille
+     * @param {*} event 
+     */
     handlePasteContent: function(event) {
         console.log("J'ai collé !");
 
         // On sélectionne la troisième classe de la cellule cliquée
         const destinationNumber = event.currentTarget.classList[2];
 
-        // Construisez la classe de destination en fonction du numéro choisi
+        // On construit la classe de destination en fonction du numéro choisi
         var destinationClass = '.' + destinationNumber;
         console.log(destinationClass);
 
-        // Sélectionnez la destination par sa classe
+        // On sélectionne la destination par sa classe
         var destinationDiv = document.querySelector(destinationClass);
         console.log(destinationDiv);
 
-        // Vérifiez si l'élément destination est présent et s'il y a du contenu à coller
+        // On vérifie si l'élément destination est présent et s'il y a du contenu à coller
         if (destinationDiv && contentToCopy !== "") {
-            // Collez le contenu dans la destination
+            // Si oui, on colle le contenu dans la destination
             destinationDiv.innerHTML = contentToCopy;
         }
     },
 
-    // Url de l'API permettant de générer une grille
+    // URL de l'API permettant de générer une grille
     createUrl: "https://sudoku-api.vercel.app/api/dosuku",
-    
-    getSudoku: async function () {
+
+    /**
+     * Fonction asynchrone qui va nous permettre d'aller récupérer une grille aléatoire de sudoku grâce à l'API Fetch et à la méthode fetch()
+     * @returns 
+     */
+    getSudoku: async function() {
         try {
             // fetch retourne une promesse (objet)
             const response = await fetch(this.createUrl);
@@ -83,20 +115,25 @@ const app = {
             }
             // On attend la résolution de la promesse et on récupère les données
             const sudoku = await response.json();
+            console.log(sudoku);
 
-            // On retourne tous les jeux vidéos
+            // On retourne la grille de sudoku
             return sudoku;
         } catch (error) {
             throw new Error(error.message);
         }
     },
 
+    /**
+     * Fonction permettant de placer les chiffres dans la grille de sudoku une fois la grille générée
+     * @param {*} setupGame 
+     */
     setupGrid: async function (setupGame) {
         // Tableau à utiliser
         const tableau = setupGame;
         console.log(tableau);
 
-        // Sélectionnez toutes les cellules par rangées
+        // On sélectionne toutes les cellules par rangées
         const row1 = document.querySelectorAll('.row-1');
         const row2 = document.querySelectorAll('.row-2');
         const row3 = document.querySelectorAll('.row-3');
@@ -107,7 +144,7 @@ const app = {
         const row8 = document.querySelectorAll('.row-8');
         const row9 = document.querySelectorAll('.row-9');
 
-        // Utilisez forEach pour itérer à travers le tableau et affecter les valeurs à chasue rangée
+        // On utilise forEach pour itérer à travers le tableau et affecter les valeurs à chasue rangée
         tableau[0].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[0][index] = '';
@@ -164,17 +201,6 @@ const app = {
         });
     },
 
-    handleStartNewGame: async function() {
-        console.log("Youhou, tu as cliqué sur Nouvelle partie !");
-        // Obtenir les données du sudoku
-        const sudoku = await this.getSudoku();
-
-        // Afficher uniquement la grille de sudoku 
-        const setupGame = sudoku.newboard.grids[0].value;
-        console.log(setupGame);
-
-        this.setupGrid(setupGame);
-    }
 }
 
 document.addEventListener('DOMContentLoaded', () => app.init());
