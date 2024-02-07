@@ -1,5 +1,5 @@
 const app = {
-    
+
     // URL de l'API permettant de générer une grille
     createUrl: "https://sudoku-api.vercel.app/api/dosuku",
     contentToCopy: "",
@@ -29,13 +29,13 @@ const app = {
         const newGame = document.querySelector('#new-game');
 
         // On place un addEventListener sur le button "Nouvelle partie"
-        newGame.addEventListener("click", () => this.handleStartNewGame());
+        newGame.addEventListener("click", (event) => this.handleStartNewGame(event));
 
         // On sélectionne le button "Vérifier"
         const verifyGame = document.querySelector('#solution');
 
         // On place un addEventListener sur le button "Vérifier
-        verifyGame.addEventListener("click", () => this.handleVerifyGame());
+        verifyGame.addEventListener("click", (event) => this.handleVerifyGame(event));
     },
 
     /**
@@ -84,8 +84,35 @@ const app = {
         console.log("Youhou, tu as cliqué sur Vérifier !");
         // On affiche la grille de sudoku si les données de sudoku sont disponibles
         if (this.sudoku) {
+            const playerGrid = this.getGrid();
+            console.log("Player Grid :", playerGrid);
+
             const solution = this.sudoku.newboard.grids[0].solution;
-            console.log(solution);
+            console.log("Solution :", solution);
+
+            const resultat = this.compareGridAndSolution(playerGrid, solution);
+            console.log(resultat);
+            if (resultat === true) {
+                // On utilise la library SweetAlert2 pour pas avoir le pavé gris tout moche de base ;) 
+                Swal.fire({
+                    title: "Bravo !",
+                    html: "La grille est correctement remplie !",
+                    imageUrl: "../images/Raccoon happy.png",
+                    imageWidth: 300,
+                    imageAlt: "Un raton laveur heureux",
+                });
+            } else {
+                // On utilise la library SweetAlert2 pour pas avoir le pavé gris tout moche de base ;) 
+                Swal.fire({
+                    title: "Essaie encore !",
+                    html: "La grille n'est pas correctement remplie !",
+                    imageUrl: "../images/Raccoon sad.png",
+                    imageWidth: 300,
+                    imageAlt: "Un raton laveur triste",
+                });
+            }
+
+
 
         } else {
             // On utilise la library SweetAlert2 pour pas avoir le pavé gris tout moche de base ;) 
@@ -97,6 +124,37 @@ const app = {
                 imageAlt: "Un raton laveur fait face à une erreur",
             });
         }
+    },
+
+    /**
+     * Fonction qui va nous permettre de comparer deux tableaux multidimensionnels
+     * @param {array} tableau1 : mettre ici la grille du joueur
+     * @param {array} tableau2 : mettre ici la grille de la solution
+     * @returns 
+     */
+    compareGridAndSolution: function (tableau1, tableau2) {
+        // On vérifie si les deux tableaux ont la même longueur
+        if (tableau1.length !== tableau2.length) {
+            return false;
+        }
+
+        // On check les éléments des deux tableaux
+        for (let index = 0; index < tableau1.length; index++) {
+            // On vérifie si les sous-tableaux des deux tableaux ont la même longueur
+            if (tableau1[index].length !== tableau2[index].length) {
+                return false;
+            }
+
+            // On compare les éléments des sous-tableaux
+            for (let subIndex = 0; subIndex < tableau1[index].length; subIndex++) {
+                // Si il y a une différence, on retourne false
+                if (tableau1[index][subIndex] !== tableau2[index][subIndex]) {
+                    return false;
+                }
+            }
+        }
+        // Si les comparaisons des tableaux et sous-tableaux sont égaux, on retourne true
+        return true;
     },
 
     rebootSelectors() {
@@ -278,7 +336,7 @@ const app = {
     /**
      * Fonction qui va nous permettre d'obtenir la grille à l'instant T
      */
-    getGrid: function() {
+    getGrid: function () {
         const gridData = [];
 
         // On fait une boucle for pour parcourir chaque ligne de la grille
