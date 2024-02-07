@@ -27,7 +27,6 @@ td {
     border: 1px solid black;
     box-sizing: border-box;
     cursor: pointer;
-    
 }
 
 .grid:nth-child(3), .grid:nth-child(6) {
@@ -46,7 +45,7 @@ tr:nth-child(3), tr:nth-child(6) {
 
 button {
     height: 35px;
-    width: 150px;
+    width: 175px;
     font-size: 20px;
 }
 

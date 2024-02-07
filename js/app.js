@@ -17,6 +17,12 @@ const app = {
             selector.addEventListener("click", (event) => this.handleCopyContent(event));
         });
 
+        // On sélectionne la gomme
+        const eraser = document.querySelector('.eraser');
+
+        // On place un addEventListener sur la gomme
+        eraser.addEventListener("click", (event) => this.handleEraseContent(event));
+
         // On sélectionne toutes les cellules
         const cells = document.querySelectorAll(".grid");
 
@@ -110,10 +116,8 @@ const app = {
                     imageWidth: 300,
                     imageAlt: "Un raton laveur triste",
                 });
-            }
-
-
-
+            };
+        // Si les données de sudoku ne sont pas disponibles, on affiche une erreur
         } else {
             // On utilise la library SweetAlert2 pour pas avoir le pavé gris tout moche de base ;) 
             Swal.fire({
@@ -232,6 +236,14 @@ const app = {
         const gridNow = this.getGrid();
         console.log("Grid now :");
         console.log(gridNow);
+    },
+
+    /**
+     * Fonction qui va permettre de sélectionner la gomme pour effacer un chiffre mal placé
+     * @param {*} event 
+     */
+    handleEraseContent: function(event) {
+        console.log("Ceci est une gomme !");
     },
 
     /**
