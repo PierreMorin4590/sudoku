@@ -1,5 +1,7 @@
 const app = {
-
+    
+    // URL de l'API permettant de générer une grille
+    createUrl: "https://sudoku-api.vercel.app/api/dosuku",
     contentToCopy: "",
     sudoku: null,
 
@@ -20,7 +22,7 @@ const app = {
 
         // On place un addEventListener sur chacune des cellules
         cells.forEach(cell => {
-            cell.addEventListener("click", this.handlePasteContent);
+            cell.addEventListener("click", (event) => this.handlePasteContent(event));
         });
 
         // On sélectionne le button "Nouvelle partie"
@@ -61,15 +63,18 @@ const app = {
         this.setupGrid(setupGame);
     },
 
+    /**
+     * Fonction permettant d'afficher la difficulté du sudoku en haut à droite de l'écran.
+     */
     displayDifficulty: async function () {
-        // On affiche la difficulté
+        // On affiche la difficulté si les données de sudoku sont disponibles
         if (this.sudoku) {
             const difficulty = this.sudoku.newboard.grids[0].difficulty;
             console.log(difficulty);
 
             const difficultyScreen = document.querySelector(".difficulty");
             difficultyScreen.innerHTML = difficulty;
-        }
+        };
     },
 
     /**
@@ -77,11 +82,13 @@ const app = {
      */
     handleVerifyGame: async function () {
         console.log("Youhou, tu as cliqué sur Vérifier !");
-        // On affiche la grille de sudoku 
-        if (this.sudoku) { // Vérification que les données du sudoku sont disponibles
+        // On affiche la grille de sudoku si les données de sudoku sont disponibles
+        if (this.sudoku) {
             const solution = this.sudoku.newboard.grids[0].solution;
             console.log(solution);
+
         } else {
+            // On utilise la library SweetAlert2 pour pas avoir le pavé gris tout moche de base ;) 
             Swal.fire({
                 title: "Ooops !",
                 html: "La grille de Sudoku n'est pas chargée.<br>Cliquez sur Nouvelle Partie !",
@@ -128,7 +135,7 @@ const app = {
         // On vérifie si l'élément source est présent
         if (sourceDiv) {
             // Si oui, on colle le contenu de la source
-            contentToCopy = sourceDiv.innerHTML;
+            contentToCopy = parseInt(sourceDiv.innerHTML);
             console.log(contentToCopy);
         }
     },
@@ -153,7 +160,6 @@ const app = {
 
         // On vérifie si la case est déjà occupée ou non par un chiffre de la grille générée aléatoirement, 
         // si c'est le cas, on return pour empêcher de coller un chiffre différent !
-
         if (destinationDiv.textContent.length > 0) {
             return;
         };
@@ -162,11 +168,13 @@ const app = {
         if (destinationDiv && contentToCopy !== "") {
             // Si oui, on colle le contenu dans la destination
             destinationDiv.innerHTML = contentToCopy;
+            parseInt(destinationDiv.innerHTML);
+            console.log(destinationDiv.innerHTML);
         };
+        const gridNow = this.getGrid();
+        console.log("Grid now :");
+        console.log(gridNow);
     },
-
-    // URL de l'API permettant de générer une grille
-    createUrl: "https://sudoku-api.vercel.app/api/dosuku",
 
     /**
      * Fonction asynchrone qui va nous permettre d'aller récupérer une grille aléatoire de sudoku grâce à l'API Fetch et à la méthode fetch()
@@ -198,7 +206,6 @@ const app = {
     setupGrid: async function (setupGame) {
         // Tableau à utiliser
         const tableau = setupGame;
-        console.log(tableau);
 
         // On sélectionne toutes les cellules par rangées
         const row1 = document.querySelectorAll('.row-1');
@@ -268,6 +275,28 @@ const app = {
         });
     },
 
+    /**
+     * Fonction qui va nous permettre d'obtenir la grille à l'instant T
+     */
+    getGrid: function() {
+        const gridData = [];
+
+        // On fait une boucle for pour parcourir chaque ligne de la grille
+        for (let i = 1; i <= 9; i++) {
+            const rowClass = `.row-${i}`;
+            const rowCells = document.querySelectorAll(rowClass);
+
+            const rowData = [];
+
+            // On fait une boucle forEach pour parcourir chaque cellule de la ligne
+            rowCells.forEach(cell => {
+                rowData.push(parseInt(cell.textContent.trim()) || 0); // Ajoute le contenu de la cellule ou 0 si vide
+            });
+            // On ajoute les données de chaque ligne au tableau gridData
+            gridData.push(rowData);
+        }
+        return gridData;
+    },
 }
 
 document.addEventListener('DOMContentLoaded', () => app.init());
