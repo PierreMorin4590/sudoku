@@ -1,8 +1,9 @@
 const app = {
 
     contentToCopy: "",
+    sudoku: null,
 
-    init: async function() {
+    init: async function () {
         console.log('app.init()');
         console.log(this.createUrl);
 
@@ -27,36 +28,68 @@ const app = {
 
         // On place un addEventListener sur le button "Nouvelle partie"
         newGame.addEventListener("click", () => this.handleStartNewGame());
+
+        // On sélectionne le button "Vérifier"
+        const verifyGame = document.querySelector('#solution');
+
+        // On place un addEventListener sur le button "Vérifier
+        verifyGame.addEventListener("click", () => this.handleVerifyGame());
     },
-    
+
     /**
      * Fonction asynchrone qui permet de générer une grille aléatoire de sudoku quand on clique sur le bouton "Nouvelle partie".
-     * La fonction fait appel à la fonction asynchrone getSudoku() qui permet de récupérer une grille aléatoire de sudoku grâce
-     * à l'API Fetch. 
-     * La fonction déclenche la fonction setupGrid() qui permet de placer les chiffres dans la grille.
+     * La fonction fait appel à la fonction asynchrone getSudoku() et déclenche la fonction setupGrid() qui permet de placer 
+     * les chiffres dans la grille.
      */
-    handleStartNewGame: async function() {
+    handleStartNewGame: async function () {
         console.log("Youhou, tu as cliqué sur Nouvelle partie !");
 
         // On reboot la couleur des selecteurs
         this.rebootSelectors();
 
         // On récupère les données du sudoku
-        const sudoku = await this.getSudoku();
-
-        // On affiche la difficulté
-        const difficulty = sudoku.newboard.grids[0].difficulty;
-        console.log(difficulty);
-
-        const difficultyScreen = document.querySelector(".difficulty");
-        difficultyScreen.innerHTML = difficulty;
+        this.sudoku = await this.getSudoku();
 
         // On affiche la grille de sudoku 
-        const setupGame = sudoku.newboard.grids[0].value;
+        const setupGame = this.sudoku.newboard.grids[0].value;
         console.log(setupGame);
+
+        // On affiche la difficulté
+        this.displayDifficulty();
 
         // On appelle la fonction qui dispatche les chiffres dans la grille
         this.setupGrid(setupGame);
+    },
+
+    displayDifficulty: async function () {
+        // On affiche la difficulté
+        if (this.sudoku) {
+            const difficulty = this.sudoku.newboard.grids[0].difficulty;
+            console.log(difficulty);
+
+            const difficultyScreen = document.querySelector(".difficulty");
+            difficultyScreen.innerHTML = difficulty;
+        }
+    },
+
+    /**
+     * Fonction permettant de comparer la grille du joueur avec la solution fournie par l'API
+     */
+    handleVerifyGame: async function () {
+        console.log("Youhou, tu as cliqué sur Vérifier !");
+        // On affiche la grille de sudoku 
+        if (this.sudoku) { // Vérification que les données du sudoku sont disponibles
+            const solution = this.sudoku.newboard.grids[0].solution;
+            console.log(solution);
+        } else {
+            Swal.fire({
+                title: "Ooops !",
+                html: "La grille de Sudoku n'est pas chargée.<br>Cliquez sur Nouvelle Partie !",
+                imageUrl: "../images/Raccoon error.png",
+                imageWidth: 300,
+                imageAlt: "Un raton laveur fait face à une erreur",
+            });
+        }
     },
 
     rebootSelectors() {
@@ -73,7 +106,7 @@ const app = {
      * Fonction qui va permettre de copier le contenu d'une des cases du sélecteur de chiffre
      * @param {*} event 
      */
-    handleCopyContent: function(event) {
+    handleCopyContent: function (event) {
         console.log("J'ai copié !");
         this.rebootSelectors();
 
@@ -104,7 +137,7 @@ const app = {
      * Fonction qui va permettre de coller le contenu d'une des cases du sélecteur de chiffre dans les cases de la grille
      * @param {*} event 
      */
-    handlePasteContent: function(event) {
+    handlePasteContent: function (event) {
         console.log("J'ai collé !");
 
         // On sélectionne la troisième classe de la cellule cliquée
@@ -139,7 +172,7 @@ const app = {
      * Fonction asynchrone qui va nous permettre d'aller récupérer une grille aléatoire de sudoku grâce à l'API Fetch et à la méthode fetch()
      * @returns 
      */
-    getSudoku: async function() {
+    getSudoku: async function () {
         try {
             // fetch retourne une promesse (objet)
             const response = await fetch(this.createUrl);

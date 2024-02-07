@@ -38,9 +38,10 @@ tr:nth-child(3), tr:nth-child(6) {
     border-bottom: 3px solid black;
 }
 
-.new-game {
+.buttons {
     display: flex;
     justify-content: center;
+    gap: 15px;
 }
 
 button {
