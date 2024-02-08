@@ -157,6 +157,38 @@ const app = {
         return true;
     },
 
+    compareCellAndSolution: function(event) {
+        // On récupère la cellule dans laquelle le chiffre est placée
+        const actualCell = event.currentTarget.classList[2];
+
+        // On récupère la valeur de la cellule où le chiffre est placé
+        const cellValue = event.currentTarget.innerHTML;
+        const cell = parseInt(cellValue);
+        console.log("Valeur cellule :", cell);
+
+        // On extrait du nom de la classe, l'indicatif de la ligne et celui de la colonne
+        // (ex: class "cell-4-5", on extrait "4" et "5")
+        const row = actualCell.substr(5, 1);
+        console.log(row);
+        const col = actualCell.substr(7, 1);
+        console.log(col);
+
+        // Cela va nous permettre de naviguer dans le tableau de la solution
+        // pour récupérer la valeur similaire au même endroit
+        const similarCell = this.sudoku.newboard.grids[0].solution;
+            console.log("Solution :", similarCell);
+        const cellSolution = similarCell[row][col];
+        console.log("Valeur case similaire", cellSolution);
+
+        // Si les deux valeurs sont différentes on passe la background en rougle clair pour indiquer une erreur
+        if (cell !== cellSolution) {
+            event.currentTarget.classList.add("error")
+        } else {
+            event.currentTarget.classList.remove("error")
+        }
+
+    },
+
     rebootSelectors() {
         // On sélectionne les sélecteurs
         const selectors = document.querySelectorAll(".selector");
@@ -174,6 +206,7 @@ const app = {
         // On supprime la class "starting-number" qui donne la couleur noire aux chiffres présents dans la grille au départ
         grid.forEach(cell => {
             cell.classList.remove("starting-number");
+            cell.classList.remove("error");
         });
     },
 
@@ -239,6 +272,7 @@ const app = {
             parseInt(destinationDiv.innerHTML);
             console.log(destinationDiv.innerHTML);
         };
+        this.compareCellAndSolution(event);
         // À supprimer en fin de projet (ci-dessous)
         const gridNow = this.getGrid(); 
         console.log("Grid now :"); 

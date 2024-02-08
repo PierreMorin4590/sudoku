@@ -60,3 +60,8 @@ button {
 .starting-number {
     color: black;
 }
+
+.error {
+    color: #E55C6C;
+    background-color: #BBDEFB;
+}
