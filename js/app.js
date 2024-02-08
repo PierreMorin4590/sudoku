@@ -228,7 +228,7 @@ const app = {
 
         // On vérifie si la case est déjà occupée ou non par un chiffre de la grille générée aléatoirement, 
         // si c'est le cas, on return pour empêcher de coller un chiffre différent !
-        if (destinationDiv.textContent.length > 0) {
+        if (destinationDiv.classList.contains("starting-number")) {
             return;
         };
 
@@ -239,8 +239,9 @@ const app = {
             parseInt(destinationDiv.innerHTML);
             console.log(destinationDiv.innerHTML);
         };
-        const gridNow = this.getGrid();
-        console.log("Grid now :");
+        // À supprimer en fin de projet (ci-dessous)
+        const gridNow = this.getGrid(); 
+        console.log("Grid now :"); 
         console.log(gridNow);
     },
 
@@ -362,7 +363,7 @@ const app = {
     },
 
     /**
-     * Fonction qui va nous permettre d'obtenir la grille à l'instant T
+     * (À supprimer à la fin) Fonction qui va nous permettre d'obtenir la grille à l'instant T
      */
     getGrid: function () {
         const gridData = [];
