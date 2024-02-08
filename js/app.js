@@ -17,12 +17,6 @@ const app = {
             selector.addEventListener("click", (event) => this.handleCopyContent(event));
         });
 
-        // On sélectionne la gomme
-        const eraser = document.querySelector('.eraser');
-
-        // On place un addEventListener sur la gomme
-        eraser.addEventListener("click", (event) => this.handleEraseContent(event));
-
         // On sélectionne toutes les cellules
         const cells = document.querySelectorAll(".grid");
 
@@ -52,6 +46,8 @@ const app = {
     handleStartNewGame: async function () {
         console.log("Youhou, tu as cliqué sur Nouvelle partie !");
 
+        // On reboot la couleur la grille (class starting-number enlevée de toutes les cellules)
+        this.rebootGrid();
         // On reboot la couleur des selecteurs
         this.rebootSelectors();
 
@@ -171,6 +167,16 @@ const app = {
         });
     },
 
+    rebootGrid() {
+        // On sélectionne toutes les cases de la grille
+        const grid = document.querySelectorAll(".grid");
+
+        // On supprime la class "starting-number" qui donne la couleur noire aux chiffres présents dans la grille au départ
+        grid.forEach(cell => {
+            cell.classList.remove("starting-number");
+        });
+    },
+
     /**
      * Fonction qui va permettre de copier le contenu d'une des cases du sélecteur de chiffre
      * @param {*} event 
@@ -239,14 +245,6 @@ const app = {
     },
 
     /**
-     * Fonction qui va permettre de sélectionner la gomme pour effacer un chiffre mal placé
-     * @param {*} event 
-     */
-    handleEraseContent: function(event) {
-        console.log("Ceci est une gomme !");
-    },
-
-    /**
      * Fonction asynchrone qui va nous permettre d'aller récupérer une grille aléatoire de sudoku grâce à l'API Fetch et à la méthode fetch()
      * @returns 
      */
@@ -292,54 +290,72 @@ const app = {
         tableau[0].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[0][index] = '';
+            } else {
+                row1[index].classList.toggle("starting-number");
             }
             row1[index].textContent = tableau[0][index];
         });
         tableau[1].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[1][index] = '';
+            } else {
+                row2[index].classList.toggle("starting-number");
             }
             row2[index].textContent = tableau[1][index];
         });
         tableau[2].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[2][index] = '';
+            } else {
+                row3[index].classList.toggle("starting-number");
             }
             row3[index].textContent = tableau[2][index];
         });
         tableau[3].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[3][index] = '';
+            } else {
+                row4[index].classList.toggle("starting-number");
             }
             row4[index].textContent = tableau[3][index];
         });
         tableau[4].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[4][index] = '';
+            } else {
+                row5[index].classList.toggle("starting-number");
             }
             row5[index].textContent = tableau[4][index];
         });
         tableau[5].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[5][index] = '';
+            } else {
+                row6[index].classList.toggle("starting-number");
             }
             row6[index].textContent = tableau[5][index];
         });
         tableau[6].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[6][index] = '';
+            } else {
+                row7[index].classList.toggle("starting-number");
             }
             row7[index].textContent = tableau[6][index];
         });
         tableau[7].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[7][index] = '';
+            } else {
+                row8[index].classList.toggle("starting-number");
             }
             row8[index].textContent = tableau[7][index];
         });
         tableau[8].forEach((valeur, index) => {
             if (valeur === 0) {
                 tableau[8][index] = '';
+            } else {
+                row9[index].classList.toggle("starting-number");
             }
             row9[index].textContent = tableau[8][index];
         });
