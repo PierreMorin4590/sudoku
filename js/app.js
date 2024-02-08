@@ -84,12 +84,15 @@ const app = {
         console.log("Youhou, tu as cliqué sur Vérifier !");
         // On affiche la grille de sudoku si les données de sudoku sont disponibles
         if (this.sudoku) {
+            // On appelle la grille à l'instant T avec la fonction getGrid()
             const playerGrid = this.getGrid();
             console.log("Player Grid :", playerGrid);
 
+            // On appelle la grille de la solution
             const solution = this.sudoku.newboard.grids[0].solution;
             console.log("Solution :", solution);
 
+            // On compare la grille du joueur à la grille de la solution
             const resultat = this.compareGridAndSolution(playerGrid, solution);
             console.log(resultat);
             if (resultat === true) {
@@ -396,6 +399,29 @@ const app = {
             }
             row9[index].textContent = tableau[8][index];
         });
+    },
+
+    /**
+     * Fonction qui va nous permettre d'obtenir la grille à l'instant T
+     */
+    getGrid: function () {
+        const gridData = [];
+
+        // On fait une boucle for pour parcourir chaque ligne de la grille
+        for (let i = 1; i <= 9; i++) {
+            const rowClass = `.row-${i}`;
+            const rowCells = document.querySelectorAll(rowClass);
+
+            const rowData = [];
+
+            // On fait une boucle forEach pour parcourir chaque cellule de la ligne
+            rowCells.forEach(cell => {
+                rowData.push(parseInt(cell.textContent.trim()) || 0); // Ajoute le contenu de la cellule ou 0 si vide
+            });
+            // On ajoute les données de chaque ligne au tableau gridData
+            gridData.push(rowData);
+        }
+        return gridData;
     },
 }
 
