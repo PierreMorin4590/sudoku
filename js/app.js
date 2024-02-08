@@ -93,9 +93,9 @@ const app = {
             console.log("Solution :", solution);
 
             // On compare la grille du joueur à la grille de la solution
-            const resultat = this.compareGridAndSolution(playerGrid, solution);
-            console.log(resultat);
-            if (resultat === true) {
+            const result = this.compareGridAndSolution(playerGrid, solution);
+            console.log(result);
+            if (result === true) {
                 // On utilise la library SweetAlert2 pour pas avoir le pavé gris tout moche de base ;) 
                 Swal.fire({
                     title: "Bravo !",
@@ -313,7 +313,7 @@ const app = {
      */
     setupGrid: async function (setupGame) {
         // Tableau à utiliser
-        const tableau = setupGame;
+        const grid = setupGame;
 
         // On sélectionne toutes les cellules par rangées
         const row1 = document.querySelectorAll('.row-1');
@@ -327,77 +327,77 @@ const app = {
         const row9 = document.querySelectorAll('.row-9');
 
         // On utilise forEach pour itérer à travers le tableau et affecter les valeurs à chasue rangée
-        tableau[0].forEach((valeur, index) => {
+        grid[0].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[0][index] = '';
+                grid[0][index] = '';
             } else {
                 row1[index].classList.toggle("starting-number");
             }
-            row1[index].textContent = tableau[0][index];
+            row1[index].textContent = grid[0][index];
         });
-        tableau[1].forEach((valeur, index) => {
+        grid[1].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[1][index] = '';
+                grid[1][index] = '';
             } else {
                 row2[index].classList.toggle("starting-number");
             }
-            row2[index].textContent = tableau[1][index];
+            row2[index].textContent = grid[1][index];
         });
-        tableau[2].forEach((valeur, index) => {
+        grid[2].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[2][index] = '';
+                grid[2][index] = '';
             } else {
                 row3[index].classList.toggle("starting-number");
             }
-            row3[index].textContent = tableau[2][index];
+            row3[index].textContent = grid[2][index];
         });
-        tableau[3].forEach((valeur, index) => {
+        grid[3].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[3][index] = '';
+                grid[3][index] = '';
             } else {
                 row4[index].classList.toggle("starting-number");
             }
-            row4[index].textContent = tableau[3][index];
+            row4[index].textContent = grid[3][index];
         });
-        tableau[4].forEach((valeur, index) => {
+        grid[4].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[4][index] = '';
+                grid[4][index] = '';
             } else {
                 row5[index].classList.toggle("starting-number");
             }
-            row5[index].textContent = tableau[4][index];
+            row5[index].textContent = grid[4][index];
         });
-        tableau[5].forEach((valeur, index) => {
+        grid[5].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[5][index] = '';
+                grid[5][index] = '';
             } else {
                 row6[index].classList.toggle("starting-number");
             }
-            row6[index].textContent = tableau[5][index];
+            row6[index].textContent = grid[5][index];
         });
-        tableau[6].forEach((valeur, index) => {
+        grid[6].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[6][index] = '';
+                grid[6][index] = '';
             } else {
                 row7[index].classList.toggle("starting-number");
             }
-            row7[index].textContent = tableau[6][index];
+            row7[index].textContent = grid[6][index];
         });
-        tableau[7].forEach((valeur, index) => {
+        grid[7].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[7][index] = '';
+                grid[7][index] = '';
             } else {
                 row8[index].classList.toggle("starting-number");
             }
-            row8[index].textContent = tableau[7][index];
+            row8[index].textContent = grid[7][index];
         });
-        tableau[8].forEach((valeur, index) => {
+        grid[8].forEach((valeur, index) => {
             if (valeur === 0) {
-                tableau[8][index] = '';
+                grid[8][index] = '';
             } else {
                 row9[index].classList.toggle("starting-number");
             }
-            row9[index].textContent = tableau[8][index];
+            row9[index].textContent = grid[8][index];
         });
     },
 
