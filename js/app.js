@@ -7,7 +7,6 @@ const app = {
 
     init: async function () {
         console.log('app.init()');
-        console.log(this.createUrl);
 
         // On sélectionne tous les sélécteurs
         const selectors = document.querySelectorAll(".selector");
@@ -72,7 +71,6 @@ const app = {
         // On affiche la difficulté si les données de sudoku sont disponibles
         if (this.sudoku) {
             const difficulty = this.sudoku.newboard.grids[0].difficulty;
-            console.log(difficulty);
 
             const difficultyScreen = document.querySelector(".difficulty");
             difficultyScreen.innerHTML = difficulty;
@@ -182,13 +180,16 @@ const app = {
 
         // Si les deux valeurs sont différentes on passe la background en rougle clair pour indiquer une erreur
         if (cell !== cellSolution) {
-            event.currentTarget.classList.add("error")
+            event.currentTarget.classList.add("error");
         } else {
-            event.currentTarget.classList.remove("error")
+            event.currentTarget.classList.remove("error");
         }
 
     },
 
+    /**
+     * Fonction permettant de supprimer la class seclected des sélecteurs de chiffre
+     */
     rebootSelectors() {
         // On sélectionne les sélecteurs
         const selectors = document.querySelectorAll(".selector");
@@ -199,11 +200,14 @@ const app = {
         });
     },
 
+    /**
+     * Fonction permettant de supprimer les classes starting-number & error des cellules du tableau avant une nouvelle partie
+     */
     rebootGrid() {
         // On sélectionne toutes les cases de la grille
         const grid = document.querySelectorAll(".grid");
 
-        // On supprime la class "starting-number" qui donne la couleur noire aux chiffres présents dans la grille au départ
+        // On supprime les class starting-number & error
         grid.forEach(cell => {
             cell.classList.remove("starting-number");
             cell.classList.remove("error");
@@ -220,7 +224,7 @@ const app = {
 
         // On ajoute une classe "selected" au chiffre sélectionné pour le rendre plus visible
         const selectorClicked = event.currentTarget;
-        console.log(selectorClicked);
+        console.log("Chiffre sélectionné :", selectorClicked);
         selectorClicked.classList.toggle("selected");
 
         // On récupère le contenu texte de la case
@@ -237,7 +241,7 @@ const app = {
         if (sourceDiv) {
             // Si oui, on colle le contenu de la source
             contentToCopy = parseInt(sourceDiv.innerHTML);
-            console.log(contentToCopy);
+            console.log("Contenu à copier :", contentToCopy);
         }
     },
 
@@ -272,11 +276,9 @@ const app = {
             parseInt(destinationDiv.innerHTML);
             console.log(destinationDiv.innerHTML);
         };
+
+        // On vérifie si le chiffre collé est correct par rapport à la solution
         this.compareCellAndSolution(event);
-        // À supprimer en fin de projet (ci-dessous)
-        const gridNow = this.getGrid(); 
-        console.log("Grid now :"); 
-        console.log(gridNow);
     },
 
     /**
@@ -394,29 +396,6 @@ const app = {
             }
             row9[index].textContent = tableau[8][index];
         });
-    },
-
-    /**
-     * (À supprimer à la fin) Fonction qui va nous permettre d'obtenir la grille à l'instant T
-     */
-    getGrid: function () {
-        const gridData = [];
-
-        // On fait une boucle for pour parcourir chaque ligne de la grille
-        for (let i = 1; i <= 9; i++) {
-            const rowClass = `.row-${i}`;
-            const rowCells = document.querySelectorAll(rowClass);
-
-            const rowData = [];
-
-            // On fait une boucle forEach pour parcourir chaque cellule de la ligne
-            rowCells.forEach(cell => {
-                rowData.push(parseInt(cell.textContent.trim()) || 0); // Ajoute le contenu de la cellule ou 0 si vide
-            });
-            // On ajoute les données de chaque ligne au tableau gridData
-            gridData.push(rowData);
-        }
-        return gridData;
     },
 }
 
