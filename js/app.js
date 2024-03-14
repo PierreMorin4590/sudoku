@@ -234,11 +234,11 @@ const app = {
         const sourceNumber = event.currentTarget.textContent;
 
         // On construit la classe de source en fonction du numéro choisi
-        var sourceClass = '.selector:nth-child(' + sourceNumber + ')';
+        const sourceClass = '.selector:nth-child(' + sourceNumber + ')';
         console.log(sourceClass);
 
         // On sélectionne la source par sa classe
-        var sourceDiv = document.querySelector(sourceClass);
+        const sourceDiv = document.querySelector(sourceClass);
 
         // On vérifie si l'élément source est présent
         if (sourceDiv) {
@@ -259,11 +259,11 @@ const app = {
         const destinationNumber = event.currentTarget.classList[2];
 
         // On construit la classe de destination en fonction du numéro choisi
-        var destinationClass = '.' + destinationNumber;
+        const destinationClass = '.' + destinationNumber;
         console.log(destinationClass);
 
         // On sélectionne la destination par sa classe
-        var destinationDiv = document.querySelector(destinationClass);
+        const destinationDiv = document.querySelector(destinationClass);
         console.log(destinationDiv);
 
         // On vérifie si la case est déjà occupée ou non par un chiffre de la grille générée aléatoirement, 
