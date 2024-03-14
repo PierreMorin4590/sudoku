@@ -100,7 +100,7 @@ const app = {
                 Swal.fire({
                     title: "Bravo !",
                     html: "La grille est correctement remplie !",
-                    imageUrl: "../images/Raccoon happy.png",
+                    imageUrl: "images/Raccoon happy.png",
                     imageWidth: 300,
                     imageAlt: "Un raton laveur heureux",
                 });
@@ -109,7 +109,7 @@ const app = {
                 Swal.fire({
                     title: "Essaie encore !",
                     html: "La grille n'est pas correctement remplie !",
-                    imageUrl: "../images/Raccoon sad.png",
+                    imageUrl: "images/Raccoon sad.png",
                     imageWidth: 300,
                     imageAlt: "Un raton laveur triste",
                 });
@@ -120,7 +120,7 @@ const app = {
             Swal.fire({
                 title: "Ooops !",
                 html: "La grille de Sudoku n'est pas chargée.<br>Cliquez sur Nouvelle Partie !",
-                imageUrl: "../images/Raccoon error.png",
+                imageUrl: "images/Raccoon error.png",
                 imageWidth: 300,
                 imageAlt: "Un raton laveur fait face à une erreur",
             });
