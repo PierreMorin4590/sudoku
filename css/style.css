@@ -16,7 +16,14 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 25px;
+}
+
+h1 {
+    font-family: "Bangers", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3em;
 }
 
 .grid {
@@ -74,3 +81,10 @@ button {
     color: #E55C6C;
     background-color: #BBDEFB;
 }
+
+.bangers-regular {
+    font-family: "Bangers", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
