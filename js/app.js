@@ -89,11 +89,12 @@ const app = {
         // On affiche la grille de sudoku si les données de sudoku sont disponibles
         if (this.sudoku) {
             // On appelle la grille à l'instant T avec la fonction getGrid()
+            console.log(this.sudoku);
             const playerGrid = this.getGrid();
             console.log("Player Grid :", playerGrid);
 
             // On appelle la grille de la solution
-            const solution = this.sudoku.newboard.grids[0].solution;
+            const solution = this.sudoku.data;
             console.log("Solution :", solution);
 
             // On compare la grille du joueur à la grille de la solution
@@ -183,7 +184,7 @@ const app = {
         const similarCell = this.sudoku.data;
             console.log("Solution :", similarCell);
         const cellSolution = similarCell[row][col];
-        console.log("Valeur case similaire", cellSolution);
+        console.log("Valeur case similaire :", cellSolution);
 
         // Si les deux valeurs sont différentes on passe la background en rougle clair pour indiquer une erreur
         if (cell !== cellSolution) {
