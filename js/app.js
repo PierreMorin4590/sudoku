@@ -1,7 +1,7 @@
 const app = {
 
     // URL de l'API permettant de générer une grille
-    createUrl: "https://sudoku-api.vercel.app/api/dosuku",
+    createUrl: "https://api.allorigins.win/get?url=https://sudoku-game-and-api.netlify.app/api/sudoku",
     contentToCopy: "",
     sudoku: null,
 
@@ -54,19 +54,22 @@ const app = {
         this.sudoku = await this.getSudoku();
 
         // On affiche la grille de sudoku 
-        const setupGame = this.sudoku.newboard.grids[0].value;
+        const setupGame = this.sudoku.medium;
         console.log(setupGame);
 
+        // TODO : Gérer l'affichage de la difficulté avec la nouvelle API
         // On affiche la difficulté
-        this.displayDifficulty();
+        // this.displayDifficulty();
 
         // On appelle la fonction qui dispatche les chiffres dans la grille
         this.setupGrid(setupGame);
     },
 
+    // TODO : Gérer l'affichage de la difficulté avec la nouvelle API
     /**
      * Fonction permettant d'afficher la difficulté du sudoku en haut à droite de l'écran.
      */
+    /*
     displayDifficulty: async function () {
         // On affiche la difficulté si les données de sudoku sont disponibles
         if (this.sudoku) {
@@ -76,6 +79,7 @@ const app = {
             difficultyScreen.innerHTML = difficulty;
         };
     },
+    */
 
     /**
      * Fonction permettant de comparer la grille du joueur avec la solution fournie par l'API
@@ -85,11 +89,12 @@ const app = {
         // On affiche la grille de sudoku si les données de sudoku sont disponibles
         if (this.sudoku) {
             // On appelle la grille à l'instant T avec la fonction getGrid()
+            console.log(this.sudoku);
             const playerGrid = this.getGrid();
             console.log("Player Grid :", playerGrid);
 
             // On appelle la grille de la solution
-            const solution = this.sudoku.newboard.grids[0].solution;
+            const solution = this.sudoku.data;
             console.log("Solution :", solution);
 
             // On compare la grille du joueur à la grille de la solution
@@ -176,10 +181,10 @@ const app = {
 
         // Cela va nous permettre de naviguer dans le tableau de la solution
         // pour récupérer la valeur similaire au même endroit
-        const similarCell = this.sudoku.newboard.grids[0].solution;
+        const similarCell = this.sudoku.data;
             console.log("Solution :", similarCell);
         const cellSolution = similarCell[row][col];
-        console.log("Valeur case similaire", cellSolution);
+        console.log("Valeur case similaire :", cellSolution);
 
         // Si les deux valeurs sont différentes on passe la background en rougle clair pour indiquer une erreur
         if (cell !== cellSolution) {
@@ -297,12 +302,14 @@ const app = {
                 throw new Error(`Failed to fetch : ${response.status}`);
             }
             // On attend la résolution de la promesse et on récupère les données
-            const sudoku = await response.json();
+            const data = await response.json();
+            const sudoku = JSON.parse(data.contents);
             console.log(sudoku);
 
             // On retourne la grille de sudoku
             return sudoku;
         } catch (error) {
+            console.error("Error fetching Sudoku:", error.message);
             throw new Error(error.message);
         }
     },
