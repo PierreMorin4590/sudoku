@@ -1,7 +1,7 @@
 const app = {
 
     // URL de l'API permettant de générer une grille
-    createUrl: "https://sudoku-api.vercel.app/api/dosuku",
+    createUrl: "https://api.allorigins.win/get?url=https://sudoku-game-and-api.netlify.app/api/sudoku",
     contentToCopy: "",
     sudoku: null,
 
@@ -297,12 +297,14 @@ const app = {
                 throw new Error(`Failed to fetch : ${response.status}`);
             }
             // On attend la résolution de la promesse et on récupère les données
-            const sudoku = await response.json();
+            const data = await response.json();
+            const sudoku = JSON.parse(data.contents);
             console.log(sudoku);
 
             // On retourne la grille de sudoku
             return sudoku;
         } catch (error) {
+            console.error("Error fetching Sudoku:", error.message);
             throw new Error(error.message);
         }
     },
