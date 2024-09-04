@@ -54,19 +54,22 @@ const app = {
         this.sudoku = await this.getSudoku();
 
         // On affiche la grille de sudoku 
-        const setupGame = this.sudoku.newboard.grids[0].value;
+        const setupGame = this.sudoku.medium;
         console.log(setupGame);
 
+        // TODO : Gérer l'affichage de la difficulté avec la nouvelle API
         // On affiche la difficulté
-        this.displayDifficulty();
+        // this.displayDifficulty();
 
         // On appelle la fonction qui dispatche les chiffres dans la grille
         this.setupGrid(setupGame);
     },
 
+    // TODO : Gérer l'affichage de la difficulté avec la nouvelle API
     /**
      * Fonction permettant d'afficher la difficulté du sudoku en haut à droite de l'écran.
      */
+    /*
     displayDifficulty: async function () {
         // On affiche la difficulté si les données de sudoku sont disponibles
         if (this.sudoku) {
@@ -76,6 +79,7 @@ const app = {
             difficultyScreen.innerHTML = difficulty;
         };
     },
+    */
 
     /**
      * Fonction permettant de comparer la grille du joueur avec la solution fournie par l'API
@@ -176,7 +180,7 @@ const app = {
 
         // Cela va nous permettre de naviguer dans le tableau de la solution
         // pour récupérer la valeur similaire au même endroit
-        const similarCell = this.sudoku.newboard.grids[0].solution;
+        const similarCell = this.sudoku.data;
             console.log("Solution :", similarCell);
         const cellSolution = similarCell[row][col];
         console.log("Valeur case similaire", cellSolution);
