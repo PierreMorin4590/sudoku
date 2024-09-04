@@ -1,5 +1,5 @@
 # raccoon-sudoku
-Création d'un sudoku en JavaScript à partir de l'API [Dosuku](https://sudoku-api.vercel.app/).
+Création d'un sudoku en JavaScript à partir de l'API [Sudoku Game and API](https://sudoku-game-and-api.netlify.app/api/sudoku).
 
 ## En résumé...
 Ce projet a été réalisé de façon personnelle en parallèle de ma formation de Développeur Web Fullstack PHP au sein de l'école O'clock.  
@@ -18,7 +18,7 @@ Au moment de réaliser ce projet, nous venions de terminer la phase socle de la 
 ## Objectifs personnels
 Les objectifs que je me suis fixé pour ce projet sont les suivants :  
 
-&rarr; Afficher une grille de sudoku grâce à l'API [Dosuku](https://sudoku-api.vercel.app/) et à la méthode fetch().  
+&rarr; Afficher une grille de sudoku grâce à l'API [Sudoku Game and API](https://sudoku-game-and-api.netlify.app/api/sudoku) et à la méthode fetch().  
 &rarr; Bouton "Nouvelle partie" : générer une nouvelle grille de sudoku.  
 &rarr; Bouton "Vérifier" : une fois la grille remplie, on peut vérifier si notre sudoku est correct.  
 &rarr; Afficher la difficulté de la grille en haut à droite de la grille.  
